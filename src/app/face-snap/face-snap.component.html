@@ -1,11 +1,5 @@
 <div class="face-snap-card" [ngClass]="{snapped: buttonText === 'Oops, Light Weight !'}">
     <h2>{{ faceSnap.title | uppercase }}</h2>
-    <p>Posted the {{ faceSnap.createdDate | date: 'dd/MM/yy  HH:mm a' }}</p>
-    <p *ngIf="faceSnap.location">Photo taken in {{faceSnap.location}}</p>
-    <img [src]="faceSnap.imageUrl" [alt]="faceSnap.title">
     <p>{{ faceSnap.description }}</p>
-    <p>
-        <button (click)="onSnap()">{{buttonText}}</button>
-        <span [ngStyle]="{color: 'rgb(0,' + faceSnap.snaps + ',0)'}">🥐 {{ faceSnap.snaps }}</span>
-    </p>
+    <button (click)="onViewFaceSnap()">{{"View" | uppercase}}</button>
   </div>
