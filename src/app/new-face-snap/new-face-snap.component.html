@@ -1,1 +1,36 @@
-<p>new-face-snap works!</p>
+<div class="form-card">
+    <h2>New FaceSnaps</h2>
+
+    <form [formGroup]="snapForm">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" formControlName="title">
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" formControlName="description"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="imageUrl">Image URL</label>
+            <input type="text" id="imageUrl" formControlName="imageUrl">
+        </div>
+        <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" id="location" formControlName="location">
+        </div>
+        <div class="action-buttons">
+            <button type="submit" (click)="onSubmitForm()" [disabled]="snapForm.invalid">Save</button>
+        </div>
+    </form>
+</div>
+
+<div class="face-snap-card" *ngIf="faceSnapPreview$ | async as faceSnap">
+    <h2>{{ faceSnap.title | uppercase }}</h2>
+    
+
+    <p>Posted the {{ faceSnap.createdDate | date: 'dd/MM/yy  HH:mm a' }}</p>
+    <p *ngIf="faceSnap.location">Photo taken in {{faceSnap.location}}</p>
+
+    <img [src]="faceSnap.imageUrl" [alt]="faceSnap.title">
+    <p>{{ faceSnap.description }}</p>
+</div>

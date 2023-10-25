@@ -10,9 +10,9 @@ export class HeaderComponent implements OnInit {
 
   constructor(private router: Router){}
 
-  ngOnInit() {}
+  ngOnInit(): void{}
 
-  onAddNewFaceSnap(): void {
+  onAddNewFaceSnap(){
     this.router.navigateByUrl('/create');
   }
 
