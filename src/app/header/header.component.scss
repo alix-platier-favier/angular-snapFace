@@ -1,12 +1,16 @@
 header {
     text-align: center;
     background-color: #EEE;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     padding: 10px;
   }
 
+  button {
+    margin: 10px 10px;
+  }
+
   a {
-    margin: 10px 10px 10px 10px;
+    margin: 10px 10px;
     color: #333;
     text-decoration: none;
     &:hover {
