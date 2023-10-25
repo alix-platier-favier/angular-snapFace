@@ -1,5 +1,6 @@
+import { FaceSnap } from './../models/face-snap.model';
+import { Observable, tap } from 'rxjs';
 import { Component, OnInit, Input } from '@angular/core';
-import { FaceSnap } from '../models/face-snap.model';
 import { FaceSnapService } from '../services/face-snaps.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -12,26 +13,27 @@ import { ActivatedRoute } from '@angular/router';
 
 export class SingleFaceSnapComponent {
 
-  @Input() faceSnap!: FaceSnap;
+  @Input() FaceSnap!: FaceSnap;
+  faceSnap$!: Observable<FaceSnap>;
   buttonText !: string;
 
   constructor(private faceSnapsService: FaceSnapService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.buttonText = "Yeah Buddy !"
+    this.buttonText = "Yeah Buddy !";
     const faceSnapId = +this.route.snapshot.params['id'];
-    this.faceSnap = this.faceSnapsService.getFaceSnapById(faceSnapId);
+    this.faceSnap$ = this.faceSnapsService.getFaceSnapById(faceSnapId);
   }
 
-  onSnap() {
-    if(this.buttonText === "Yeah Buddy !"){
-      this.faceSnapsService.snapFaceSnapById(this.faceSnap.id, 'snap');
-      this.buttonText = "Oops, Light Weight !";
-    }else{
-      this.faceSnapsService.snapFaceSnapById(this.faceSnap.id, 'unsnap');
-      this.buttonText = "Yeah Buddy !";
+  onSnap(faceSnapId: number) {
+    if (this.buttonText === 'Yeah Buddy !') {
+        this.faceSnapsService.snapFaceSnapById(faceSnapId, 'snap').subscribe();
+        this.buttonText = 'Oops, Light Weight !';
+    } else {
+        this.faceSnapsService.snapFaceSnapById(faceSnapId, 'unsnap').subscribe();
+        this.buttonText = 'Yeah Buddy !';
     }
-  }
+  } 
 }
 
