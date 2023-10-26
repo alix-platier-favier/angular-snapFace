@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./single-face-snap.component.scss']
 })
 
-export class SingleFaceSnapComponent {
+export class SingleFaceSnapComponent implements OnInit{
 
   @Input() FaceSnap!: FaceSnap;
   faceSnap$!: Observable<FaceSnap>;
