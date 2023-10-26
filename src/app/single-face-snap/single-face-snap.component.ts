@@ -28,11 +28,13 @@ export class SingleFaceSnapComponent {
 
   onSnap(faceSnapId: number) {
     if (this.buttonText === 'Yeah Buddy !') {
-        this.faceSnapsService.snapFaceSnapById(faceSnapId, 'snap').subscribe();
-        this.buttonText = 'Oops, Light Weight !';
+        this.faceSnap$ = this.faceSnapsService.snapFaceSnapById(faceSnapId, 'snap').pipe(
+          tap(() => this.buttonText = 'Oops, Light Weight !')
+        );
     } else {
-        this.faceSnapsService.snapFaceSnapById(faceSnapId, 'unsnap').subscribe();
-        this.buttonText = 'Yeah Buddy !';
+        this.faceSnap$ = this.faceSnapsService.snapFaceSnapById(faceSnapId, 'unsnap').pipe(
+          tap(() => this.buttonText = 'Yeah Buddy !')
+        );
     }
   } 
 }

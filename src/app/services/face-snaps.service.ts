@@ -74,5 +74,19 @@ export class FaceSnapService{
     //   };
     //   this.faceSnaps.push(faceSnap);
     // }
+
+    addFaceSnap(formValues: {title: string, description: string, imageUrl: string, location?: string}): Observable<FaceSnap> {
+      return this.getAllFaceSnaps().pipe(
+        map(facesnaps => [...facesnaps].sort((a, b) => a.id - b.id)),
+        map(sortedFacesnaps => sortedFacesnaps[sortedFacesnaps.length - 1]),
+        map(previousFaceSnap => ({
+          ...formValues,
+          createdDate: new Date(),
+          snaps: 0,
+          id: previousFaceSnap.id + 1,
+        })),
+        switchMap(newFaceSnap => this.http.post<FaceSnap>('http://localhost:3000/facesnaps', newFaceSnap))
+      );
+    }
 }
 
